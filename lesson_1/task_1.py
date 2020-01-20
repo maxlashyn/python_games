@@ -32,4 +32,6 @@ elif 5 > number > 0:
 if number <= 0:
     exploded_string = 'Max знает питон'.split(' ')
     exploded_string[1] = 'изучает'
+    print("%s %s %s" % (exploded_string[0], exploded_string[1], exploded_string[2]))
     print(exploded_string[0], exploded_string[1], exploded_string[2])
+    print(exploded_string[0], 'изучает', exploded_string[2])    
