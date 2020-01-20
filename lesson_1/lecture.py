@@ -71,6 +71,10 @@ while i < 4:
 """ функция """
 
 
+def factorial(x):
+    return x
+
+
 def add(x: 'int, >0', y: int) -> int:
     return x + y
 
