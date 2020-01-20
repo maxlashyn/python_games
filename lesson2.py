@@ -11,6 +11,8 @@ if number >= 5:
     for i in range(0, number, 1):
         a += 'Q'
     print(a)
+#   a = ['Q' for i in range(0, number)]
+#   print(''.join(a))
 
 
 # 4. eсли число меньше 5, но больше 0, вывести таким же образом символ 'W'
