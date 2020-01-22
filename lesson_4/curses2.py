@@ -4,7 +4,7 @@ from random import randint
 HEIGHT = 20
 WIDTH = 30
 MIN_WIDTH = 1
-MIN_HEIGHT =  1
+MIN_HEIGHT = 1
 MAX_WIDTH = WIDTH - 2
 MAX_HEIGTH = HEIGHT - 2
 
@@ -27,27 +27,26 @@ window.border(0)
 
 window.addstr(0, 5, f"this text header")
 
-for i in range(15):
-	window.addstr(randint(MIN_HEIGHT, MAX_HEIGTH), randint(MIN_WIDTH, MAX_WIDTH), '0')
+for i in range(10):
+    window.addstr(randint(MIN_HEIGHT, MAX_HEIGTH), randint(MIN_WIDTH, MAX_WIDTH), '0')
 
 while True:
     event = window.getch()
 
-#    if event == 27:
-#        break
+    #    if event == 27:
+    #        break
 
     window.addstr(prev_y, prev_x, ' ')
     window.addstr(y, x, '@')
 
     if MIN_WIDTH > x + dx or x + dx > MAX_WIDTH or window.inch(y, x + dx) != 32:
-    	dx = -dx
-    if MIN_HEIGHT > y + dy or y + dy > MAX_HEIGTH or window.inch(y + dy, x) != 32: 
-    	dy = -dy
+        dx = -dx
+    if MIN_HEIGHT > y + dy or y + dy > MAX_HEIGTH or window.inch(y + dy, x) != 32:
+        dy = -dy
     if window.inch(y + dy, x + dx) != 32:
-    	dx, dy = -dx, -dy
+        dx, dy = -dx, -dy
 
-    prev_x, prev_y, x, y = x, y, x + dx, y + dy 
-
-
+    prev_x, prev_y, x, y = x, y, x + dx, y + dy
 
 curses.endwin()
+
