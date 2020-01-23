@@ -18,6 +18,7 @@ curses.noecho()
 curses.curs_set(0)
 window.border(0)
 
+
 x, y = MIN_WIDTH + randint(0, 10), MIN_HEIGHT + randint(0, 10)
 prev_x, prev_y = x, y
 dx, dy = 1, 1
@@ -25,10 +26,11 @@ dx, dy = 1, 1
 window.clear()
 window.border(0)
 
-window.addstr(0, 5, f"this text header")
+window.addstr(0, 5, "this text header")
 
 for i in range(10):
-    window.addstr(randint(MIN_HEIGHT, MAX_HEIGTH), randint(MIN_WIDTH, MAX_WIDTH), '0')
+    window.addstr(randint(MIN_HEIGHT, MAX_HEIGTH),
+                  randint(MIN_WIDTH, MAX_WIDTH), '0')
 
 while True:
     event = window.getch()
@@ -39,14 +41,14 @@ while True:
     window.addstr(prev_y, prev_x, ' ')
     window.addstr(y, x, '@')
 
-    if MIN_WIDTH > x + dx or x + dx > MAX_WIDTH or window.inch(y, x + dx) != 32:
+    new_x, new_y = x + dx, y + dy
+    if MIN_WIDTH > new_x or new_x > MAX_WIDTH or window.inch(y, new_x) != 32:
         dx = -dx
-    if MIN_HEIGHT > y + dy or y + dy > MAX_HEIGTH or window.inch(y + dy, x) != 32:
+    if MIN_HEIGHT > new_y or new_y > MAX_HEIGTH or window.inch(new_y, x) != 32:
         dy = -dy
-    if window.inch(y + dy, x + dx) != 32:
+    if window.inch(new_y, new_x) != 32:
         dx, dy = -dx, -dy
 
-    prev_x, prev_y, x, y = x, y, x + dx, y + dy
+    prev_x, prev_y, x, y = x, y, new_x, new_y
 
 curses.endwin()
-
