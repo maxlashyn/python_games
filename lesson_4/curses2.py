@@ -6,7 +6,7 @@ WIDTH = 30
 MIN_WIDTH = 1
 MIN_HEIGHT = 1
 MAX_WIDTH = WIDTH - 2
-MAX_HEIGTH = HEIGHT - 2
+MAX_HEIGHT = HEIGHT - 2
 
 curses.initscr()
 curses.beep()
@@ -29,7 +29,7 @@ window.border(0)
 window.addstr(0, 5, "this text header")
 
 for i in range(10):
-    window.addstr(randint(MIN_HEIGHT, MAX_HEIGTH),
+    window.addstr(randint(MIN_HEIGHT, MAX_HEIGHT),
                   randint(MIN_WIDTH, MAX_WIDTH), '0')
 
 while True:
@@ -39,16 +39,20 @@ while True:
     #        break
 
     window.addstr(prev_y, prev_x, ' ')
+
     window.addstr(y, x, '@')
 
     new_x, new_y = x + dx, y + dy
+    change = False
     if MIN_WIDTH > new_x or new_x > MAX_WIDTH or window.inch(y, new_x) != 32:
         dx = -dx
-    if MIN_HEIGHT > new_y or new_y > MAX_HEIGTH or window.inch(new_y, x) != 32:
+        change = True
+    if MIN_HEIGHT > new_y or new_y > MAX_HEIGHT or window.inch(new_y, x) != 32:
         dy = -dy
-    if window.inch(new_y, new_x) != 32:
+        change = True
+    if not change and window.inch(new_y, new_x) != 32:
         dx, dy = -dx, -dy
 
-    prev_x, prev_y, x, y = x, y, new_x, new_y
+    prev_x, prev_y, x, y = x, y, x + dx, y + dy
 
 curses.endwin()
