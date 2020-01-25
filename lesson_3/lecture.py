@@ -16,6 +16,7 @@ print(d)
 Max = [14, 50, 'Max']
 print(Max)
 
+
 """ operation with list """
 Max.append('Lashyn')
 print(Max)
