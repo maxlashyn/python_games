@@ -25,7 +25,7 @@ class NewWidget(Widget):
             for x in range(0, 200, 50):
                 for y in range(0, 200, 50):
                     Rectangle(source='assets/l0_SpaceShip0021.png', size=(50, 50), pos=(x, y))
-            self.rectagle = Ellipse(pos=(0, 0), size=(30, 20))
+            self.rectangle = Ellipse(pos=(0, 0), size=(30, 20))
 
             self.line = Line(points=[
                 100, 100,
@@ -37,10 +37,10 @@ class NewWidget(Widget):
 
     def update(self, dt):
         # self.top, self.right, 0, 0
-        # self.rectagle.pos[0] - x
-        # self.rectagle.pos[1] - y
-        # a = self.rectagle.size[0] - width
-        # self.rectagle.size[1] - height
+        # self.rectangle.pos[0] - x
+        # self.rectangle.pos[1] - y
+        # a = self.rectangle.size[0] - width
+        # self.rectangle.size[1] - height
         self.rectagle.pos = Vector(SPEED, SPEED) + self.rectagle.pos
 
 
