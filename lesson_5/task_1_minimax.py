@@ -25,24 +25,27 @@ import sys
 
 EMPTY_CHAR = '_'
 
+
 def select(opponent_select):
     return 'x' if opponent_select == '0' else '0'
 
-field = [[ EMPTY_CHAR for i in range(3)] for j in range(3)]
+
+field = [[EMPTY_CHAR for i in range(3)] for j in range(3)]
 
 user_char = input('выберите крестик или нолик:')
 computer_char = select(user_char)
 vertical = ['a', 'b', 'c']
 
 scores = {
-  computer_char: 10,
-  user_char: -10,
-  'tie': 0
+    computer_char: 10,
+    user_char: -10,
+    'tie': 0
 }
+
 
 def bestMove(field):
     board = [field[y].copy() for y in range(3)]
-    bestScore = -sys.maxsize 
+    bestScore = -sys.maxsize
     move = None
     for y in range(3):
         for x in range(3):
@@ -53,15 +56,15 @@ def bestMove(field):
                 if score > bestScore:
                     bestScore = score
                     move = (x, y)
-        
+
     return move
+
 
 def is_tie(board):
     for y in range(3):
         if EMPTY_CHAR in board[y]:
             return False
     return True
-
 
 
 def minimax(board, depth, is_maximizing):
@@ -80,7 +83,7 @@ def minimax(board, depth, is_maximizing):
                     board[y][x] = computer_char
                     score = minimax(board, depth + 1, False)
                     board[y][x] = EMPTY_CHAR
-                    bestScore = max(score, bestScore)    
+                    bestScore = max(score, bestScore)
     else:
         bestScore = sys.maxsize
         for y in range(3):
@@ -89,7 +92,7 @@ def minimax(board, depth, is_maximizing):
                     board[y][x] = user_char
                     score = minimax(board, depth + 1, True)
                     board[y][x] = EMPTY_CHAR
-                    bestScore = min(score, bestScore)    
+                    bestScore = min(score, bestScore)
     return bestScore
 
 
@@ -105,18 +108,19 @@ def get_computer_position(field):
         x, y = randint(0, 2), randint(0, 2)
     return x, y
 
+
 def check_win(selected_char, field):
-    opponent_char = select(selected_char)    
+    opponent_char = select(selected_char)
     for y in range(3):
         row = field[y]
-        if opponent_char not in row  and EMPTY_CHAR not in row:
+        if opponent_char not in row and EMPTY_CHAR not in row:
             return True
 
     for x in range(3):
         row = [field[0][x], field[1][x], field[2][x]]
         if opponent_char not in row and EMPTY_CHAR not in row:
             return True
-    
+
     row = [field[0][0], field[1][1], field[2][2]]
     if opponent_char not in row and EMPTY_CHAR not in row:
         return True
@@ -126,6 +130,7 @@ def check_win(selected_char, field):
         return True
 
     return False
+
 
 def show_field(field):
     print(' ', '1', '2', '3')
@@ -144,16 +149,14 @@ while True:
     if check_win(user_char, field):
         print('win')
         break
-        
+
     pos = bestMove(field)
     if pos != None:
         x, y = pos
         field[y][x] = computer_char
-        print(field)
         if check_win(computer_char, field):
             print('lose')
             break
     if is_tie(field):
         print('tie')
         break
-
