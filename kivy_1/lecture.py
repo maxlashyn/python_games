@@ -13,7 +13,7 @@ from kivy.vector import Vector
 
 from kivy.app import App
 from kivy.uix.widget import Widget
-from kivy.graphics import Rectangle, Rotate
+from kivy.graphics import Ellipse, Rectangle
 from kivy.clock import Clock
 
 SPEED = 1
@@ -22,7 +22,10 @@ class NewWidget(Widget):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         with self.canvas:
-            self.rectagle = Rectangle(source='assets/l0_SpaceShip0021.png', pos=(0, 0), size=(30, 30))
+            for x in range(0, 200, 50):
+                for y in range(0, 200, 50):
+                    Rectangle(source='assets/l0_SpaceShip0021.png', size=(50, 50), pos=(x, y))
+            self.rectagle = Ellipse(pos=(0, 0), size=(30, 20))
 
             self.line = Line(points=[
                 100, 100,
@@ -38,7 +41,6 @@ class NewWidget(Widget):
         # self.rectagle.pos[1] - y
         # a = self.rectagle.size[0] - width
         # self.rectagle.size[1] - height
-
         self.rectagle.pos = Vector(SPEED, SPEED) + self.rectagle.pos
 
 
