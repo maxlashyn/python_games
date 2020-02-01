@@ -33,6 +33,12 @@ class NewWidget(Widget):
             ], width=1)
 
     def update(self, dt):
+        # self.top, self.right, 0, 0
+        # self.rectagle.pos[0] - x
+        # self.rectagle.pos[1] - y
+        # a = self.rectagle.size[0] - width
+        # self.rectagle.size[1] - height
+
         self.rectagle.pos = Vector(SPEED, SPEED) + self.rectagle.pos
 
 
