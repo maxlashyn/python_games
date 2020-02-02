@@ -28,4 +28,25 @@ def factorial2(x):
     return y
 
 
-print(factorial(5))
+"""
+3 9 + 4 + 0
+s = x**2 + (x-1)**2 + (x-2)**2 + 0
+"""
+
+
+def sum_square(max_x):
+    s = 0
+    for x in range(2, max_x + 1, 1):
+        s += (x - 2) ** 2
+    return s
+
+
+def sum_reqursion(max_x):
+    if max_x <= 2:
+        return 0
+    return (max_x -2) ** 2 + sum_reqursion(max_x - 1)
+
+
+
+print(sum_square(6))
+print(sum_reqursion(6))
