@@ -1,6 +1,7 @@
-from character import Character
 from random import randint
-from options import *
+from lesson_7.character import Character
+from lesson_7.options import *
+
 
 class Monster(Character):
     def __init__(self, name):

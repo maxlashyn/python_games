@@ -26,7 +26,7 @@ else:
 
 """ finaly: """
 try:
-    a = 1/0
+    a = 1 / 0
 except ZeroDivisionError:
     print('zero division')
 finally:
@@ -34,8 +34,10 @@ finally:
 
 """ create exception class """
 
+
 class MyException(Exception):
     pass
+
 
 """ throw exception (raise) """
 
@@ -49,8 +51,9 @@ try:
 except MyException:
     print('my exception')
 
-
 """ catch parent - child exceptions """
+
+
 class MyNewException(MyException):
     pass
 
@@ -74,12 +77,9 @@ except Exception:
 try:
     a = 'error value'
     if a != 1:
-        raise MyNewException({'msg':'message about exception', 'value':a})
+        raise MyNewException({'msg': 'message about exception', 'value': a})
 
     while True:
         pass
 except MyNewException as e:
     print(e)
-
-
-

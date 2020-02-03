@@ -1,6 +1,6 @@
-from options import *
-from character import Character
 from random import randint
+from lesson_7.options import *
+from lesson_7.character import Character
 
 
 class User(Character):

@@ -1,5 +1,5 @@
 """ modules """
-from test import *
+from lesson_4.test import *
 
 print(append(1, 2))
 print(div(9,3))
@@ -12,14 +12,14 @@ print(div(9,3))
 """
 
 """ aliases """
-from test import mul as умножить
+from lesson_4.test import mul as умножить
 
 print(умножить(2, 3))
 
 """ dir() """
 """ import """
-import test
-print(dir(test)) # покажет, что можно из этого модуля использовать
+import lesson_4.test
+print(dir(lesson_4.test)) # покажет, что можно из этого модуля использовать
 
 """ run modules as script """
 
@@ -30,11 +30,11 @@ if __name__ == '__main__':
 """ packages """
 """ __init__.py """
 
-from testpack.test import *
+from lesson_4.testpack.test import *
 
 print(append1(1, 2))
 
-from testpack.level2.test import *
+from lesson_4.testpack.level2.test import *
 
 print(append2(5, 2))
 

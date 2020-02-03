@@ -1,5 +1,5 @@
-from options import *
-from functions import *
+from lesson_7.options import *
+from lesson_7.functions import *
 
 
 class Map:
@@ -98,7 +98,6 @@ class Map:
         if self.field[y][x] == TREASURE:
             self.field[y][x] = GRASS
             self.treasure_pos.remove((x, y))
-
 
     def set_monster_position(self, character, x, y):
         self.monster_pos = (x, y)

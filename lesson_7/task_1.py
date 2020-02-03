@@ -40,9 +40,9 @@ h - лечиться
 
 """
 
-from user import User
-from map import Map
-from monster import Monster
+from lesson_7.user import User
+from lesson_7.map import Map
+from lesson_7.monster import Monster
 
 field = Map()
 field.generate()

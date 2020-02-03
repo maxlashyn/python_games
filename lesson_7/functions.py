@@ -1,6 +1,7 @@
-from options import *
+from lesson_7.options import *
 from random import randint
 from math import sqrt
+
 
 def get_random_pos():
     return randint(0, MAP_WIDTH), randint(0, MAP_HEIGHT)

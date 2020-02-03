@@ -1,5 +1,5 @@
 from random import randint
-from options import *
+from lesson_7.options import *
 
 
 class Character:
@@ -25,5 +25,6 @@ class Character:
     def show_hp(self):
         print(f"{self.name}'s hp = {self.hp}")
 
-    def get_action(self):
+    @staticmethod
+    def get_action():
         return randint(ACTION_ATTACK, ACTION_HEAL)
