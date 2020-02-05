@@ -34,6 +34,7 @@ SLEEP_BEFORE_RUN = 500
 class Field(Widget):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        Window.bind(on_resize=self._on_window_resize)
         self._keyboard = Window.request_keyboard(self._on_keyboard_close, self)
         self._keyboard.bind(on_key_down=self._on_key_down)
         self.dx = SPEED * choice([-1, 1])
@@ -44,15 +45,25 @@ class Field(Widget):
 
         with self.canvas:
             self.center_line = Rectangle(pos=(Window.size[0] // 2, 0), size=(5, Window.size[1]))
-            self.left_label = Label(pos_hint=(0.1, 0.1), text=str(self.left_player_score))
+            self.left_label = Label(pos=(Window.size[0]//5, Window.size[1] - 100), font_size=40, text=str(self.left_player_score))
             self.left_racket = Rectangle(pos=(20, Window.size[1] // 2 - 50), size=(5, 100))
 
-            self.right_label = Label(pos_hint=(0.2, 0.2), text=str(self.right_player_score))
+            self.right_label = Label(pos=(Window.size[0]- Window.size[0]//5, Window.size[1] - 100), font_size=40, text=str(self.right_player_score))
             self.right_racket = Rectangle(pos=(Window.size[0] - 20, Window.size[1] // 2 - 50), size=(5, 100))
 
             self.ball = Ellipse(pos=(Window.size[0] // 2 - 15, Window.size[1] // 2 - 15), size=(30, 30))
             self.circle = Line(
                 circle=(Window.size[0] // 2, Window.size[1] // 2, 100, 0, 360))
+
+
+    def _on_window_resize(self, window, width, height):
+        self.center_line.pos = (Window.size[0] // 2, 0)
+        self.center_line.size = (5, Window.size[1])
+        self.right_racket.pos = (Window.size[0] - 20, self.right_racket.pos[1])
+        self.circle.circle = (Window.size[0] // 2, Window.size[1] // 2, 100, 0, 360)
+        self.left_label.pos = (Window.size[0]//4, Window.size[1] - 100)
+        self.right_label.pos = (Window.size[0]- Window.size[0]//4, Window.size[1] - 100)
+
 
     def _on_keyboard_close(self):
         self._keyboard.unbind(on_key_down=self._on_key_down)
@@ -77,11 +88,6 @@ class Field(Widget):
                and racket.pos[1] <= ball.pos[1] + ball.size[1] // 2 <= racket.pos[1] + racket.size[1]
 
     def update(self, dt):
-        self.center_line.pos = (Window.size[0] // 2, 0)
-        self.center_line.size = (5, Window.size[1])
-        self.right_racket.pos = (Window.size[0] - 20, self.right_racket.pos[1])
-        self.circle.circle = (Window.size[0] // 2, Window.size[1] // 2, 100, 0, 360)
-
         if self.run < SLEEP_BEFORE_RUN:
             self.run += 1
 
