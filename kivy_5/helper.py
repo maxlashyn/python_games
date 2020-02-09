@@ -12,18 +12,42 @@
 - кнопка "Пропустить", выводим другое слово
 
 """
+from random import choice
+
 from kivy.app import App
 from kivy.properties import ObjectProperty
 from kivy.uix.gridlayout import GridLayout
-
+from dictionary import dictionary
 
 class Helper(GridLayout):
     inp = ObjectProperty('')
     out = ObjectProperty('')
+    message = ObjectProperty('')
+    words = {}
+    english = ''
+    russian = ''
 
-    def press_button(self, button):
-        self.out = self.inp.text
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.words = dictionary
 
+    def press_button_next(self, button):
+        pair = choice(list(self.words.items()))
+        self.english = pair[0]
+        self.russian = pair[1]
+        self.out = self.english
+        self.message = ''
+        self.inp.text = ''
+
+    def press_button_check(self, button):
+        if self.inp.text == self.russian:
+            self.message = 'Вы отгадали'
+            self.inp.text = ''
+        else:
+            self.message = 'Вы ответили неправильно'
+
+    def press_button_help(self, button):
+        self.message = self.russian
 
 class HelperApp(App):
     def build(self):

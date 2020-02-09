@@ -3,8 +3,30 @@
     inp: input
     Label:
         text: root.out
+        canvas:
+            Color:
+                rgba: 1, 1, 1, 0.5
+            Rectangle:
+                size: self.size
+                pos: self.pos
     TextInput:
         id: input
-    Button:
-        text: 'press'
-        on_press: root.press_button(self)
+    Label:
+        text: root.message
+        canvas:
+            Color:
+                rgba: 1, 1, 1, 0.5
+            Rectangle:
+                size: self.size
+                pos: self.pos
+    GridLayout:
+        cols:3
+        Button:
+            text: 'проверить'
+            on_press: root.press_button_check(self)
+        Button:
+            text: 'подсказка'
+            on_press: root.press_button_help(self)
+        Button:
+            text: 'следующее слово'
+            on_press: root.press_button_next(self)
