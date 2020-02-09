@@ -1,3 +1,54 @@
+<CalcScreen>:
+    MainScreen:
+
+    SecondScreen:
+
+<MainScreen>:
+    name: 'helper'
+    Helper:
+
+<SecondScreen>:
+    name: 'dictionary'
+    Dictionary:
+
+<Dictionary>:
+    cols: 1
+    english: english
+    russian: russian
+    GridLayout:
+        cols: 2
+        Label:
+            text: 'english'
+            canvas:
+                Color:
+                    rgba: 1, 1, 1, 0.5
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+        TextInput:
+            id: english
+            multiline: False
+        Label:
+            text: 'русский'
+            canvas:
+                Color:
+                    rgba: 1, 1, 1, 0.5
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+        TextInput:
+            id: russian
+            multiline: False
+    GridLayout:
+        cols: 2
+        Button:
+            text: '< helper'
+            on_release:
+                app.root.current = 'helper'
+                app.root.transition.direction = 'right'
+        Button:
+            text: 'save'
+            on_press: root.on_press_save_button(self)
 <Helper>:
     cols: 1
     inp: input
@@ -20,7 +71,7 @@
                 size: self.size
                 pos: self.pos
     GridLayout:
-        cols:3
+        cols:4
         Button:
             text: 'проверить'
             on_press: root.press_button_check(self)
@@ -30,3 +81,8 @@
         Button:
             text: 'следующее слово'
             on_press: root.press_button_next(self)
+        Button:
+            text: 'dictionary >'
+            on_release:
+                app.root.current = 'dictionary'
+                app.root.transition.direction = 'left'

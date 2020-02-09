@@ -12,27 +12,45 @@
 - кнопка "Пропустить", выводим другое слово
 
 """
+import json
 from random import choice
 
 from kivy.app import App
 from kivy.properties import ObjectProperty
 from kivy.uix.gridlayout import GridLayout
-from dictionary import dictionary
+from kivy.uix.screenmanager import Screen, ScreenManager
+
+try:
+    fp = open('dictionary.json', 'r')
+    dictionary = json.load(fp)
+    fp.close()
+except json.decoder.JSONDecodeError:
+    dictionary = {}
+
+
+class Dictionary(GridLayout):
+    english = ObjectProperty('')
+    russian = ObjectProperty('')
+
+    def on_press_save_button(self, button):
+        dictionary[self.english.text] = self.russian.text
+        fp = open('dictionary.json', 'w')
+        json.dump(dictionary, fp)
+        fp.close()
+
 
 class Helper(GridLayout):
     inp = ObjectProperty('')
     out = ObjectProperty('')
     message = ObjectProperty('')
-    words = {}
     english = ''
     russian = ''
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.words = dictionary
 
     def press_button_next(self, button):
-        pair = choice(list(self.words.items()))
+        pair = choice(list(dictionary.items()))
         self.english = pair[0]
         self.russian = pair[1]
         self.out = self.english
@@ -49,9 +67,22 @@ class Helper(GridLayout):
     def press_button_help(self, button):
         self.message = self.russian
 
+
+class MainScreen(Screen):
+    pass
+
+
+class SecondScreen(Screen):
+    pass
+
+
+class CalcScreen(ScreenManager):
+    pass
+
+
 class HelperApp(App):
     def build(self):
-        return Helper()
+        return CalcScreen()
 
 
 HelperApp().run()
