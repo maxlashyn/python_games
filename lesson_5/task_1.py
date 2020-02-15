@@ -102,7 +102,3 @@ while True:
     if three_in_row(computer_char, field):
         print('lose')
         break
-
-
-
-
